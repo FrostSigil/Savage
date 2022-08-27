@@ -78,7 +78,6 @@ module.exports = function Savage(mod) {
 		if(counter > 5) {
 			let missing = (item == mod.settings.nostrum) ? 'Nostrums' :
 			enabled = false
-			mod.command.message('You ran out of ' + missing + ' (ID: ' + item + '). Savage has been disabled. Please restock and enable the module again by typing "ses" in this chat.')
 			return
 		}
 		if(!resetcount) resetcount = setTimeout(() => { counter = 0; resetcount = null }, 15000)
