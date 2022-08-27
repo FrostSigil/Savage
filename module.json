@@ -1,0 +1,15 @@
+{
+    "disableAutoUpdate": false,
+    "name": "Savage",
+    "author": "TeraProxy / Sati",
+    "description": "A tera-proxy module that automatically uses Nostrum/Battle Solution and Complete Crystalbind items whenever needed.",
+    "version": "3",
+    "options": {
+        "niceName": "Savage",
+        "guiName": "Savage",
+        "settingsVersion": 5,
+        "settingsFile": "config.json",
+        "settingsMigrator": "settings_migrator.js"
+    },
+    "servers": ["https://raw.githubusercontent.com/FrostSigil/Savage/master"]
+}
