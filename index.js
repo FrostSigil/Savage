@@ -23,6 +23,16 @@ module.exports = function Savage(mod) {
 
 	mod.game.me.on('resurrect', () => { start() })
 
+    mod.hook("S_ABNORMALITY_BEGIN", 4, () => {
+        if (mod.game.me.abnormalities ["10154031"] ) {
+            mod.send('C_PLAYER_LOCATION', 5,            
+            {
+            "type" : 5,
+            "jumpDistance": 0
+            })
+        }
+    });
+
 	mod.hook('S_PREMIUM_SLOT_DATALIST', 2, event => {
 		for(let set of event.sets)
 			for(let entry of set.inventory)
