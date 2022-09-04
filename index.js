@@ -29,18 +29,6 @@ module.exports = function Savage(mod) {
 	mod.game.on('leave_game', () => { stop() })
 
 	mod.game.me.on('resurrect', () => { start() })
-
-	mod.hook("S_ABNORMALITY_BEGIN", 4, () => {
-        if (mod.game.me.abnormalities ["10154031"] ) {
-            mod.send('C_PLAYER_LOCATION', 5,            
-            {
-            "loc": player.loc,
-            "w": player.w,
-            "dest": player.loc,
-            "type" : 5,
-            })
-        }
-    }); 
     
     mod.hook("S_ABNORMALITY_BEGIN", 4, () => {
         if (mod.game.me.abnormalities ["77700800"] ) {
