@@ -42,6 +42,18 @@ module.exports = function Savage(mod) {
         }
     });
 
+	mod.hook("S_ABNORMALITY_BEGIN", 4, () => {
+        if (mod.game.me.abnormalities ["47700800"] ) {
+            mod.send('C_PLAYER_LOCATION', 5,            
+            {
+            "loc": player.loc,
+            "w": player.w,
+            "dest":  player.loc,
+            "type" : 5
+            })
+        }
+    });
+
 	mod.hook('S_PREMIUM_SLOT_DATALIST', 2, event => {
 		for(let set of event.sets)
 			for(let entry of set.inventory)
