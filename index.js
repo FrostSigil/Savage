@@ -7,9 +7,8 @@ const ITEMS_NOSTRUM = [150942], // Tempestuous Savage Draught
 module.exports = function Savage(mod) {
 
 	mod.game.initialize(['me', 'me.abnormalities', 'contract']);
-
-	let player = null,
-		dest = null,
+	
+	let playerLocationEvent = null,
 		item = null,
 		interval = null,
 		enabled = true,
@@ -20,39 +19,23 @@ module.exports = function Savage(mod) {
 	// ### Hooks ### //
 	// ############# //
 
-    mod.hook("C_PLAYER_LOCATION", 5, event => { 
-        player = event;
-        dest = event;
-    });
-
 	mod.game.on('enter_game', () => { setTimeout(start, 6000) })
 	mod.game.on('leave_game', () => { stop() })
 
 	mod.game.me.on('resurrect', () => { start() })
-    
-    mod.hook("S_ABNORMALITY_BEGIN", 4, () => {
-        if (mod.game.me.abnormalities ["77700800"] ) {
-            mod.send('C_PLAYER_LOCATION', 5,            
-            {
-            "loc": player.loc,
-            "w": player.w,
-            "dest":  player.loc,
-            "type" : 5
-            })
-        }
-    });
 
-	mod.hook("S_ABNORMALITY_BEGIN", 4, () => {
-        if (mod.game.me.abnormalities ["47700800"] ) {
-            mod.send('C_PLAYER_LOCATION', 5,            
-            {
-            "loc": player.loc,
-            "w": player.w,
-            "dest":  player.loc,
-            "type" : 5
-            })
-        }
-    });
+	mod.hook("C_PLAYER_LOCATION", 5, event => { 
+		playerLocationEvent = event;
+	 });
+	 
+	mod.hook("S_ABNORMALITY_BEGIN", 4, event => {
+        if(enabled) {		
+		if(!mod.game.me.is(event.target) || !playerLocationEvent ||
+		   (event.id !== 47700800 && event.id !== 77700800)
+		) return;
+		mod.send('C_PLAYER_LOCATION', 5, { ...playerLocationEvent, "type": 5 });
+		}
+	});
 
 	mod.hook('S_PREMIUM_SLOT_DATALIST', 2, event => {
 		for(let set of event.sets)

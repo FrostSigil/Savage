@@ -9,7 +9,8 @@
         "guiName": "Savage",
         "settingsVersion": 5,
         "settingsFile": "config.json",
-        "settingsMigrator": "settings_migrator.js"
+        "settingsMigrator": "settings_migrator.js",
+        "reloadable": true
     },
     "servers": ["https://raw.githubusercontent.com/FrostSigil/Savage/master/"]
 }
