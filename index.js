@@ -26,16 +26,17 @@ module.exports = function Savage(mod) {
 
 	mod.hook("C_PLAYER_LOCATION", 5, event => { 
 		playerLocationEvent = event;
-	 });
+	})
 	 
 	mod.hook("S_ABNORMALITY_BEGIN", 4, event => {
-        if(enabled) {		
+        if(mod.settings.abnormal) {
 		if(!mod.game.me.is(event.target) || !playerLocationEvent ||
 		   (event.id !== 47700800 && event.id !== 77700800)
 		) return;
-		mod.send('C_PLAYER_LOCATION', 5, { ...playerLocationEvent, "type": 5 });
+		mod.send('C_PLAYER_LOCATION', 5, { ...playerLocationEvent, "type": 5 })
+		mod.send("C_PLAYER_LOCATION", 5, { ...playerLocationEvent, "type": 7 })
 		}
-	});
+	})
 
 	mod.hook('S_PREMIUM_SLOT_DATALIST', 2, event => {
 		for(let set of event.sets)
@@ -127,11 +128,17 @@ module.exports = function Savage(mod) {
 	// ### Commands ### //
 	// ################ //
 
+	mod.command.add(['sas'], {
+		$none() {
+            mod.settings.abnormal = !mod.settings.abnormal;
+			mod.command.message(`Abnormal control ` + (mod.settings.abnormal ? "enabled" : "disabled"))
+		}
+	})	
+
 	mod.command.add(['Savage', 'ses'], (cmd) => {
 		if(cmd == null) {
 			enabled = !enabled
 			mod.command.message('Savage Draught' + (enabled ? '<font color="#56B4E9">enabled</font>' : '<font color="#E69F00">disabled</font>'))
-			console.log('Savage Draught' + (enabled ? 'enabled' : 'disabled'))
 		}
 		else if(cmd == "dungeon" || cmd == "dungeons" || cmd == "dung") {
 			mod.settings.dungeonOnly = !mod.settings.dungeonOnly
