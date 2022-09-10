@@ -3,6 +3,7 @@
 const DefaultSettings = {
 	"useNostrum": true,
 	"abnormal": true,
+	"enabled": true,
 	"nostrumTime": 29,
 	"dungeonOnly": true,
 	"log": false,

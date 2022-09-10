@@ -82,7 +82,7 @@ module.exports = function Savage(mod) {
 		if(!mod.game.isIngame || mod.game.isInLoadingScreen || !mod.game.me.alive || mod.game.me.mounted || mod.game.me.inBattleground || mod.game.contract.active) return
 		if(!mod.game.me.inDungeon && mod.settings.dungeonOnly) return
 
-		if(enabled) {
+		if(mod.settings.enabled) {
 			if(item) mod.send('C_USE_PREMIUM_SLOT', 1, item)
 			else useItem(mod.settings.nostrum)
 		}
@@ -137,7 +137,7 @@ module.exports = function Savage(mod) {
 
 	mod.command.add(['Savage', 'ses'], (cmd) => {
 		if(cmd == null) {
-			enabled = !enabled
+			mod.settings.enabled = !mod.settings.enabled
 			mod.command.message('Savage Draught' + (enabled ? '<font color="#56B4E9">enabled</font>' : '<font color="#E69F00">disabled</font>'))
 		}
 		else if(cmd == "dungeon" || cmd == "dungeons" || cmd == "dung") {

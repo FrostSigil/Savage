@@ -7,7 +7,7 @@
     "options": {
         "niceName": "Savage",
         "guiName": "Savage",
-        "settingsVersion": 5,
+        "settingsVersion": 7,
         "settingsFile": "config.json",
         "settingsMigrator": "settings_migrator.js",
         "reloadable": true
