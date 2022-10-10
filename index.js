@@ -138,7 +138,7 @@ module.exports = function Savage(mod) {
 	mod.command.add(['Savage', 'ses'], (cmd) => {
 		if(cmd == null) {
 			mod.settings.enabled = !mod.settings.enabled
-			mod.command.message('Savage Draught' + (enabled ? '<font color="#56B4E9">enabled</font>' : '<font color="#E69F00">disabled</font>'))
+			mod.command.message(`Savage Draught ${mod.settings.enabled ? "enabled" : "disabled" }`);
 		}
 		else if(cmd == "dungeon" || cmd == "dungeons" || cmd == "dung") {
 			mod.settings.dungeonOnly = !mod.settings.dungeonOnly
